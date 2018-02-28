@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerMapper2">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.Customer">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId"/>
+        <result column="CustomerCode" jdbcType="VARCHAR" property="customerCode"/>
+        <result column="CustomerName" jdbcType="VARCHAR" property="customerName"/>
+        <result column="Status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Table">
+    Customer
+  </sql>
+    <sql id="Base_Column_List">
+    Id, EnterpriseId, CustomerName, Status
+  </sql>
+    <select id="findById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table"/>
+        WHERE
+        Id = #{id}
+    </select>
+    <select id="findByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table"/>
+        WHERE
+        CustomerCode = #{customerCode}
+    </select>
+</mapper>

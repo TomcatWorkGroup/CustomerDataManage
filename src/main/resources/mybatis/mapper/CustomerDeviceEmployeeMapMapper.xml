@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerDeviceEmployeeMapMapper2">
+  <sql id="Table">
+    Device_Employee_Map
+  </sql>
+  <insert id="add">
+    INSERT
+    INTO
+    <include refid="Table"/>
+    (EmployeeId,DeviceId)
+    VALUES
+    (#{employeeId},#{deviceId})
+  </insert>
+  <delete id="remove">
+    DELETE
+    FROM
+    <include refid="Table"/>
+    WHERE
+    EmployeeId=#{employeeId}
+    AND
+    DeviceId=#{deviceId}
+  </delete>
+  <delete id="removeEmployeeMap">
+    DELETE
+    FROM
+    <include refid="Table"/>
+    WHERE
+    EmployeeId=#{employeeId}
+  </delete>
+  <select id="checkExists" resultType="java.lang.Integer">
+    SELECT
+    COUNT(*)
+    FROM
+    <include refid="Table"/>
+    WHERE
+    EmployeeId=#{employeeId}
+    AND
+    DeviceId=#{deviceId}
+  </select>
+</mapper>

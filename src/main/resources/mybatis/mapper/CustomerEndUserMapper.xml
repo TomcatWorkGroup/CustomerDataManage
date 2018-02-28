@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerEndUserMapper2">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.EndUser">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId"/>
+        <result column="CustomerId" jdbcType="INTEGER" property="customerId"/>
+        <result column="LocalId" jdbcType="VARCHAR" property="localId"/>
+        <result column="EndUserName" jdbcType="VARCHAR" property="endUserName"/>
+        <result column="Contacts" jdbcType="VARCHAR" property="contacts"/>
+        <result column="Telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="Province" jdbcType="VARCHAR" property="province"/>
+        <result column="City" jdbcType="VARCHAR" property="city"/>
+        <result column="Address" jdbcType="VARCHAR" property="address"/>
+        <result column="Status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Table">
+    EndUser
+  </sql>
+    <sql id="Base_Column_List">
+    Id,EnterpriseId, CustomerId, LocalId, EndUserName,Contacts,Telephone,Province,City,Address,Status
+  </sql>
+    <sql id="Fix_Option">
+        CustomerId=#{customerId}
+        AND
+        LocalId=#{localId}
+    </sql>
+    <sql id="Filter_Not_Deleted">
+    IsDeleted = 0
+  </sql>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT
+        COUNT (*)
+        FROM
+        <include refid="Table"/>
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Filter_Not_Deleted"/>
+    </select>
+    <update id="remove">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        IsDeleted = 1
+        WHERE
+        <include refid="Fix_Option"/>
+    </update>
+    <update id="modify">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        EndUserName=#{endUserName},
+        Contacts=#{contacts},
+        Telephone=#{telephone},
+        Province=#{province},
+        City=#{city},
+        Address=#{address},
+        Status=#{status}
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Filter_Not_Deleted"/>
+    </update>
+    <update id="changeStatus">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        Status=#{status}
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Filter_Not_Deleted"/>
+    </update>
+    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.EndUser">
+        INSERT INTO
+        <include refid="Table"/>
+        (EnterpriseId,CustomerId,LocalId,EndUserName,Contacts,
+        Telephone, Province,City,Address,Status)
+        VALUES
+        (
+        #{enterpriseId},#{customerId},#{localId},#{endUserName},#{contacts},
+        #{telephone},#{ province},#{city},#{address},#{status}
+        )
+    </insert>
+    <select id="find" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table"/>
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Filter_Not_Deleted"/>
+    </select>
+</mapper>

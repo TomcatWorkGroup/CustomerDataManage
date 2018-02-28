@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerProductMapper2">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.CustomerProduct">
+        <id column="CustomerId" jdbcType="INTEGER" property="customerId"/>
+        <id column="LocalId" jdbcType="VARCHAR" property="localId"/>
+        <result column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="ProductCode" jdbcType="VARCHAR" property="productCode"/>
+        <result column="DeviceId" jdbcType="INTEGER" property="deviceId"/>
+        <result column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId"/>
+        <result column="EnterpriseProductCode" jdbcType="VARCHAR" property="enterpriseProductCode"/>
+        <result column="CategoryLocalId" jdbcType="INTEGER" property="categoryLocalId"/>
+        <result column="Status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Table">
+    CustomerProduct
+  </sql>
+    <sql id="Base_Column_List">
+    CustomerId, LocalId, ProductCode, DeviceId, EnterpriseId,EnterpriseProductCode, CategoryLocalId, Status
+  </sql>
+    <sql id="Fix_Option">
+        CustomerId=#{customerId}
+        AND
+        LocalId=#{localId}
+    </sql>
+    <sql id="Filter_Not_Deleted">
+        IsDeleted = 0
+    </sql>
+    <sql id="Status_Option">
+        Status = 1
+    </sql>
+    <update id="remove">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        IsDeleted = 1
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Status_Option" />
+    </update>
+    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.CustomerProduct">
+        INSERT
+        INTO
+        <include refid="Table"/>
+        (CustomerId, LocalId,ProductCode, DeviceId,EnterpriseId,EnterpriseProductCode, CategoryLocalId, Status)
+        VALUES
+        (#{customerId,jdbcType=INTEGER},
+        #{localId},
+        #{productCode,jdbcType=VARCHAR},
+        #{deviceId,jdbcType=INTEGER},
+        #{enterpriseId,jdbcType=INTEGER},
+        #{enterpriseProductCode,jdbcType=VARCHAR},
+        #{categoryLocalId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER})
+    </insert>
+    <update id="modify">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        CategoryLocalId=#{categoryLocalId},DeviceId=#{deviceId},EnterpriseId=#{enterpriseId},EnterpriseProductCode=#{enterpriseProductCode},ProductCode=#{productCode}
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Status_Option" />
+    </update>
+    <update id="changeStatus">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        Status=#{status}
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Status_Option" />
+    </update>
+    <update id="removeCategory">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        CategoryLocalId=NULL
+        WHERE
+        CustomerId=#{customerId}
+        AND
+        CategoryLocalId=#{categoryLocalId}
+    </update>
+    <select id="find" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table"/>
+        WHERE
+        <include refid="Fix_Option"/>
+        AND
+        <include refid="Filter_Not_Deleted"/>
+    </select>
+</mapper>

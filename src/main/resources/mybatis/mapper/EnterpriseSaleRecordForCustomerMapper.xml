@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.EnterpriseSaleRecordForCustomerMapper2">
+    <sql id="Table">
+      Enterprise_Sale_Record
+    </sql>
+    <update id="setEndUser">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        EndUserId = #{endUserId}
+        WHERE
+        EnterpriseProductCode=#{enterpriseProductCode}
+        AND
+        CustomerId=#{customerId}
+    </update>
+</mapper>

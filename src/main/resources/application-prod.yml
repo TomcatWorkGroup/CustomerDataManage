@@ -1,0 +1,8 @@
+debug: false
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/emdb?useUnicode=true&characterEncoding=utf-8
+    username: dba_user
+    password: Test@163.com

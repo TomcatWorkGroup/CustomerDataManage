@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerEmployeeMapper2">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.Employee">
+        <id column="Mobile" jdbcType="VARCHAR" property="mobile"/>
+        <id column="Email" jdbcType="VARCHAR" property="email"/>
+        <result column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="OrgType" jdbcType="INTEGER" property="orgType"/>
+        <result column="OrgId" jdbcType="INTEGER" property="orgId"/>
+        <result column="Password" jdbcType="VARCHAR" property="password"/>
+        <result column="WeiXin" jdbcType="VARCHAR" property="weiXin"/>
+        <result column="QQ" jdbcType="VARCHAR" property="qQ"/>
+        <result column="RealName" jdbcType="VARCHAR" property="realName"/>
+        <result column="Status" jdbcType="INTEGER" property="status"/>
+        <result column="LastLoginDatetime" jdbcType="TIMESTAMP" property="lastLoginDatetime"/>
+        <result column="Mark" jdbcType="VARCHAR" property="mark"/>
+    </resultMap>
+    <sql id="Table">
+    Employee
+  </sql>
+    <sql id="Base_Column_List">
+    Id,OrgType,OrgId,Password, Mobile, Email, WeiXin,QQ,RealName,Status,LastLoginDatetime,Mark
+    </sql>
+    <sql id="Fix_Option">
+        OrgType=3
+        AND
+        OrgId=#{orgId}
+        AND
+        ( Mobile=#{loginId} OR Email=#{loginId} )
+    </sql>
+    <delete id="remove">
+        DELETE
+        FROM
+        <include refid="Table"/>
+        WHERE
+        <include refid="Fix_Option"/>
+    </delete>
+    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.Employee">
+        INSERT
+        INTO
+        <include refid="Table"/>
+        (OrgType, OrgId, Password, Mobile, Email, WeiXin,QQ,RealName,Status,Mark)
+        VALUES
+        (3, #{orgId}, #{password}, #{mobile}, #{email}, #{weiXin},#{qQ},#{realName},#{status},#{mark})
+    </insert>
+    <update id="changeStatus">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        Status = #{status}
+        WHERE
+        <include refid="Fix_Option"/>
+    </update>
+    <select id="find" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table"/>
+        WHERE
+        <include refid="Fix_Option"/>
+    </select>
+    <select id="findByLoginId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table"/>
+        WHERE
+        Mobile=#{loginId} OR Email=#{loginId}
+    </select>
+    <update id="modify" parameterType="com.itdreamworks.customerdatamanage.entity.Employee">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        Password=#{password},
+        WeiXin=#{weiXin},
+        QQ=#{qQ},
+        RealName=#{realName},
+        Status=#{status},
+        Mark=#{mark}
+        WHERE
+        OrgType=3
+        AND
+        OrgId=#{orgId}
+        AND
+        ( Mobile=#{mobile} OR Email=#{email} )
+    </update>
+</mapper>
