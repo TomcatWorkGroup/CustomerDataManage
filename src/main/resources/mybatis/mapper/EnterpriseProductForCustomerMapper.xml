@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itdreamworks.customerdatamanage.mapper2.EnterpriseProductForCustomer2">
-    <resultMap id="BaseViewResultMap" type="com.itdreamworks.customerdatamanage.entity.EnterpriseProductForCustomerView">
+    <resultMap id="BaseViewResultMap" type="com.itdreamworks.customerdatamanage.entity.db.EnterpriseProductForCustomerView">
         <result column="EnterpriseName" jdbcType="VARCHAR" property="enterpriseName" />
         <result column="CategoryName" jdbcType="VARCHAR" property="categoryName" />
         <result column="CustomerId" jdbcType="INTEGER" property="customerId" />
         <result column="ProductCode" jdbcType="VARCHAR" property="productCode" />
         <result column="SaleDatetime" jdbcType="TIMESTAMP" property="saleDatetime" />
     </resultMap>
-    <resultMap id="BaseTableResultMap" type="com.itdreamworks.customerdatamanage.entity.EnterpriseProduct">
+    <resultMap id="BaseTableResultMap" type="com.itdreamworks.customerdatamanage.entity.db.EnterpriseProduct">
         <id column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId" />
         <id column="ProductCode" jdbcType="VARCHAR" property="productCode" />
         <result column="Id" jdbcType="INTEGER" property="id" />

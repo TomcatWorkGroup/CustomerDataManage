@@ -1,4 +1,4 @@
-package com.itdreamworks.customerdatamanage.entity;
+package com.itdreamworks.customerdatamanage.entity.db;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

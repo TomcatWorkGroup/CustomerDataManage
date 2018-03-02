@@ -1,7 +1,8 @@
 package com.itdreamworks.customerdatamanage.service;
 
-import com.itdreamworks.customerdatamanage.entity.CustomerProduct;
-import com.itdreamworks.customerdatamanage.entity.Employee;
+import com.itdreamworks.customerdatamanage.entity.db.CustomerProduct;
+import com.itdreamworks.customerdatamanage.entity.db.Employee;
+import com.itdreamworks.customerdatamanage.entity.enums.ResultStatus;
 import com.itdreamworks.customerdatamanage.mapper2.CustomerDeviceEmployeeMapMapper2;
 import com.itdreamworks.customerdatamanage.mapper2.CustomerEmployeeMapper2;
 import com.itdreamworks.customerdatamanage.mapper2.CustomerProductMapper2;
@@ -23,64 +24,64 @@ public class CustomerEmployeeService {
     }
 
     @Transactional
-    public DbEntityStatus remove(int orgId, String loginId){
+    public ResultStatus remove(int orgId, String loginId){
         Employee employee = employeeDao.find(orgId,loginId);
         if(null == employee)
-            return DbEntityStatus.UNKNOWN;
+            return ResultStatus.UNKNOWN;
 
         deMapDao.removeEmployeeMap(employee.getId());
         employeeDao.remove(orgId,loginId);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus modify(Employee employee){
+    public ResultStatus modify(Employee employee){
         int i = employeeDao.modify(employee);
         if(1 == i)
-            return DbEntityStatus.SUCCESS;
+            return ResultStatus.SUCCESS;
         else
-            return DbEntityStatus.DELETED;
+            return ResultStatus.DELETED;
     }
 
-    public DbEntityStatus changeStatus(int status,int orgId,String loginId){
+    public ResultStatus changeStatus(int status,int orgId,String loginId){
         employeeDao.changeStatus(status,orgId,loginId);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus add(Employee employee) throws Exception{
+    public ResultStatus add(Employee employee){
         employee.setOrgType(Employee.ORG_CUSTOMER);
         employeeDao.add(employee);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus addDeviceMap(int orgId, String loginId,String productLocalId){
+    public ResultStatus addDeviceMap(int orgId, String loginId,String productLocalId){
         Employee employee = employeeDao.find(orgId,loginId);
         if(null == employee){
-            return DbEntityStatus.UNKNOWN_EMPLOYEE;
+            return ResultStatus.UNKNOWN_EMPLOYEE;
         }
         if(Employee.STATUS_DISABLE == employee.getStatus()){
-            return DbEntityStatus.DISABLE;
+            return ResultStatus.DISABLE;
         }
         CustomerProduct product = productDao.find(orgId,productLocalId);
         if(null == product)
-            return DbEntityStatus.UNKNOWN_PRODUCT;
+            return ResultStatus.UNKNOWN_PRODUCT;
 
         if(deMapDao.checkExists(employee.getId(),product.getDeviceId())>0)
-            return DbEntityStatus.SUCCESS;
+            return ResultStatus.SUCCESS;
 
         deMapDao.add(employee.getId(),product.getDeviceId());
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus removeDeviceMap(int orgId, String loginId,String productLocalId){
+    public ResultStatus removeDeviceMap(int orgId, String loginId,String productLocalId){
         Employee employee = employeeDao.find(orgId,loginId);
         if(null == employee)
-            return DbEntityStatus.UNKNOWN_EMPLOYEE;
+            return ResultStatus.UNKNOWN_EMPLOYEE;
 
         CustomerProduct product = productDao.find(orgId,productLocalId);
         if(null == product)
-            return DbEntityStatus.UNKNOWN_PRODUCT;
+            return ResultStatus.UNKNOWN_PRODUCT;
 
         deMapDao.remove(employee.getId(),product.getDeviceId());
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 }

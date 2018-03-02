@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerMapper2">
-    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.Customer">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.db.Customer">
         <id column="Id" jdbcType="INTEGER" property="id"/>
         <result column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId"/>
         <result column="CustomerCode" jdbcType="VARCHAR" property="customerCode"/>

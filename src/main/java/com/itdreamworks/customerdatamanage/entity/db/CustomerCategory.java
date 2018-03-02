@@ -1,4 +1,4 @@
-package com.itdreamworks.customerdatamanage.entity;
+package com.itdreamworks.customerdatamanage.entity.db;
 
 import java.io.Serializable;
 

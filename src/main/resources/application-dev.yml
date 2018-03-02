@@ -7,4 +7,4 @@ spring:
     username: dba_user
     password: Test@163.com
 server:
-  port: 8081
+  port: 8088

@@ -1,9 +1,9 @@
 package com.itdreamworks.customerdatamanage.controller;
 
-import com.itdreamworks.customerdatamanage.entity.EndUser;
+import com.itdreamworks.customerdatamanage.entity.db.EndUser;
+import com.itdreamworks.customerdatamanage.entity.enums.ResultStatus;
 import com.itdreamworks.customerdatamanage.service.CustomerEndUserService;
-import com.itdreamworks.customerdatamanage.service.DbEntityStatus;
-import com.itdreamworks.customerdatamanage.utils.DbEntityStatusJsonStringUtil;
+import com.itdreamworks.customerdatamanage.utils.ResultStatusJsonStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,42 +16,28 @@ public class EndUserController {
     private CustomerEndUserService service;
 
     @PostMapping(value = "/add")
-    public String add(EndUser endUser){
-        String str ="";
-        try {
-            DbEntityStatus s = service.add(endUser);
-            str = DbEntityStatusJsonStringUtil.getStatusString(s);
-        } catch (Exception e) {
-            e.printStackTrace();
-            str = DbEntityStatusJsonStringUtil.getExceptionString(e);
-        }
-        return str;
+    public String add(EndUser endUser) {
+        ResultStatus s = service.add(endUser);
+        return ResultStatusJsonStringUtil.getStatusString(s);
     }
 
     @PostMapping(value = "/remove")
-    public String remove(int customerId,String localId){
-        DbEntityStatus s = service.remove(customerId,localId);
-        return DbEntityStatusJsonStringUtil.getStatusString(s);
+    public String remove(int customerId, String localId) {
+        ResultStatus s = service.remove(customerId, localId);
+        return ResultStatusJsonStringUtil.getStatusString(s);
     }
 
     @PostMapping(value = "/changeStatus")
     public String changeStatus(int status,
                                int customerId,
-                               String localId){
-        DbEntityStatus s = service.changeStatus(status,customerId,localId);
-        return DbEntityStatusJsonStringUtil.getStatusString(s);
+                               String localId) {
+        ResultStatus s = service.changeStatus(status, customerId, localId);
+        return ResultStatusJsonStringUtil.getStatusString(s);
     }
 
     @PostMapping(value = "/modify")
-    public String modify(EndUser endUser){
-        String str ="";
-        try {
-            DbEntityStatus s = service.modify(endUser);
-            str = DbEntityStatusJsonStringUtil.getStatusString(s);
-        } catch (Exception e) {
-            e.printStackTrace();
-            str = DbEntityStatusJsonStringUtil.getExceptionString(e);
-        }
-        return str;
+    public String modify(EndUser endUser) {
+        ResultStatus s = service.modify(endUser);
+        return ResultStatusJsonStringUtil.getStatusString(s);
     }
 }

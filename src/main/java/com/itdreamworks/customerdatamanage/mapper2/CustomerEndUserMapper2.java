@@ -1,6 +1,6 @@
 package com.itdreamworks.customerdatamanage.mapper2;
 
-import com.itdreamworks.customerdatamanage.entity.EndUser;
+import com.itdreamworks.customerdatamanage.entity.db.EndUser;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

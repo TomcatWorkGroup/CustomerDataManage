@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerEmployeeMapper2">
-    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.Employee">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.db.Employee">
         <id column="Mobile" jdbcType="VARCHAR" property="mobile"/>
         <id column="Email" jdbcType="VARCHAR" property="email"/>
         <result column="Id" jdbcType="INTEGER" property="id"/>
@@ -35,7 +35,7 @@
         WHERE
         <include refid="Fix_Option"/>
     </delete>
-    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.Employee">
+    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.db.Employee">
         INSERT
         INTO
         <include refid="Table"/>
@@ -67,7 +67,7 @@
         WHERE
         Mobile=#{loginId} OR Email=#{loginId}
     </select>
-    <update id="modify" parameterType="com.itdreamworks.customerdatamanage.entity.Employee">
+    <update id="modify" parameterType="com.itdreamworks.customerdatamanage.entity.db.Employee">
         UPDATE
         <include refid="Table"/>
         SET

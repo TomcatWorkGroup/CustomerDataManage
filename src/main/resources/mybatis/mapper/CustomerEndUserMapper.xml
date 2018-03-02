@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itdreamworks.customerdatamanage.mapper2.CustomerEndUserMapper2">
-    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.EndUser">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.db.EndUser">
         <id column="Id" jdbcType="INTEGER" property="id"/>
         <result column="EnterpriseId" jdbcType="INTEGER" property="enterpriseId"/>
         <result column="CustomerId" jdbcType="INTEGER" property="customerId"/>
@@ -72,7 +72,7 @@
         AND
         <include refid="Filter_Not_Deleted"/>
     </update>
-    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.EndUser">
+    <insert id="add" parameterType="com.itdreamworks.customerdatamanage.entity.db.EndUser">
         INSERT INTO
         <include refid="Table"/>
         (EnterpriseId,CustomerId,LocalId,EndUserName,Contacts,

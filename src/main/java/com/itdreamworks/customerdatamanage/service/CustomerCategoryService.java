@@ -1,6 +1,7 @@
 package com.itdreamworks.customerdatamanage.service;
 
-import com.itdreamworks.customerdatamanage.entity.CustomerCategory;
+import com.itdreamworks.customerdatamanage.entity.db.CustomerCategory;
+import com.itdreamworks.customerdatamanage.entity.enums.ResultStatus;
 import com.itdreamworks.customerdatamanage.mapper2.CustomerCategoryMapper2;
 import com.itdreamworks.customerdatamanage.mapper2.CustomerProductMapper2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,19 @@ public class CustomerCategoryService {
     private CustomerCategoryMapper2 customerCategoryDao;
 
     @Transactional
-    public DbEntityStatus remove(int customerId, String localId) throws Exception{
+    public ResultStatus remove(int customerId, String localId) {
         productDao.removeCategory(customerId, localId);
         customerCategoryDao.remove(customerId, localId);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus changeCategoryName(String categoryName, int customerId, String localId) {
+    public ResultStatus changeCategoryName(String categoryName, int customerId, String localId) {
         customerCategoryDao.changeCategoryName(categoryName, customerId, localId);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 
-    public DbEntityStatus add(CustomerCategory customerCategory) throws Exception {
+    public ResultStatus add(CustomerCategory customerCategory) {
         customerCategoryDao.add(customerCategory);
-        return DbEntityStatus.SUCCESS;
+        return ResultStatus.SUCCESS;
     }
 }
