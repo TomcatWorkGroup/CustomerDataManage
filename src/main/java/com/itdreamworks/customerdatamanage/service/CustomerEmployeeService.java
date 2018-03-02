@@ -27,7 +27,7 @@ public class CustomerEmployeeService {
     public ResultStatus remove(int orgId, String loginId){
         Employee employee = employeeDao.find(orgId,loginId);
         if(null == employee)
-            return ResultStatus.UNKNOWN;
+            return ResultStatus.UNKNOWN_EMPLOYEE;
 
         deMapDao.removeEmployeeMap(employee.getId());
         employeeDao.remove(orgId,loginId);
@@ -39,12 +39,15 @@ public class CustomerEmployeeService {
         if(1 == i)
             return ResultStatus.SUCCESS;
         else
-            return ResultStatus.DELETED;
+            return ResultStatus.UNKNOWN_EMPLOYEE;
     }
 
     public ResultStatus changeStatus(int status,int orgId,String loginId){
-        employeeDao.changeStatus(status,orgId,loginId);
-        return ResultStatus.SUCCESS;
+        int i = employeeDao.changeStatus(status,orgId,loginId);
+        if(1 == i)
+            return ResultStatus.SUCCESS;
+        else
+            return ResultStatus.UNKNOWN_EMPLOYEE;
     }
 
     public ResultStatus add(Employee employee){
@@ -59,7 +62,7 @@ public class CustomerEmployeeService {
             return ResultStatus.UNKNOWN_EMPLOYEE;
         }
         if(Employee.STATUS_DISABLE == employee.getStatus()){
-            return ResultStatus.DISABLE;
+            return ResultStatus.DISABLE_EMPLOYEE;
         }
         CustomerProduct product = productDao.find(orgId,productLocalId);
         if(null == product)

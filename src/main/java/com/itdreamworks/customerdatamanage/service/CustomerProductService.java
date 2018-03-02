@@ -43,9 +43,9 @@ public class CustomerProductService {
     public ResultStatus remove(int customerId,String localId){
         CustomerProduct product = productDao.find(customerId,localId);
         if(null == product){
-            return ResultStatus.UNKNOWN;
+            return ResultStatus.UNKNOWN_PRODUCT;
         }else if(product.getStatus() == CustomerProduct.STATUS_SOLD){
-            return ResultStatus.SOLD;
+            return ResultStatus.SOLD_PRODUCT;
         }else {
             productDao.remove(customerId,localId);
             return ResultStatus.SUCCESS;
@@ -55,7 +55,7 @@ public class CustomerProductService {
     public ResultStatus modify(CustomerProduct product){
         EnterpriseProduct enterpriseProduct = enterpriseProductForCustomerDao.getProduct(product.getEnterpriseProductCode());
         if(null == enterpriseProduct)
-            return ResultStatus.UNKNOWN_PRODUCT;
+            return ResultStatus.UNKNOWN_ENTERPRISE_PRODUCT;
 
         CustomerCategory category = categoryDao.find(product.getCustomerId(),product.getCategoryLocalId());
         if(null == category)
@@ -66,23 +66,23 @@ public class CustomerProductService {
         product.setEnterpriseId(enterpriseProduct.getEnterpriseId());
 
         int i = productDao.modify(product);
-        if(0 == i)
-            return ResultStatus.UNKNOWN;
-        else
+        if(1 == i)
             return ResultStatus.SUCCESS;
+        else
+            return ResultStatus.UNKNOWN_PRODUCT;
     }
 
     @Transactional
     public ResultStatus sell(int customerId, String productLocalId, String endUserLocalId,Date saleDatetime){
         CustomerProduct product = productDao.find(customerId,productLocalId);
         if(null == product){
-            return ResultStatus.UNKNOWN;
+            return ResultStatus.UNKNOWN_PRODUCT;
         }else if(product.getStatus() == CustomerProduct.STATUS_SOLD){
-            return ResultStatus.SOLD;
+            return ResultStatus.SOLD_PRODUCT;
         }
         EndUser endUser = endUserDao.find(customerId,endUserLocalId);
         if(null == endUser){
-            return  ResultStatus.UNKNOWN;
+            return  ResultStatus.UNKNOWN_ENDUSER;
         }
 
         CustomerSaleRecord saleRecord = new CustomerSaleRecord();

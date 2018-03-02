@@ -1,16 +1,16 @@
 package com.itdreamworks.customerdatamanage.entity.enums;
 
 public enum ResultStatus {
-    SOLD("已售出",0),
-    DELETED("已删除",1),
-    DISABLE("已禁用",2),
-    UNKNOWN("未知或无该记录",10),
-    UNKNOWN_CATEGORY("类别未知或无该类别",11),
-    UNKNOWN_PRODUCT("产品未知或无该产品",12),
-    UNKNOWN_ENDUSER("终端用户未知或无该终端用户",13),
-    UNKNOWN_EMPLOYEE("员工未知或无该员工",14),
-    SUCCESS("操作成功",200),
-    ERROR("服务器错误",500);
+    SUCCESS("操作成功",0),
+    UNKNOWN_CATEGORY("类别未知或无该类别",100),
+    UNKNOWN_PRODUCT("产品未知或无该产品",101),
+    UNKNOWN_ENDUSER("终端用户未知或无该终端用户",102),
+    UNKNOWN_EMPLOYEE("员工未知或无该员工",103),
+    UNKNOWN_ENTERPRISE_PRODUCT("配件未知或无该配件",104),
+    DISABLE_EMPLOYEE("员工被禁用",200),
+    SOLD_PRODUCT("产品已售出",300),
+    ERROR("异常",400);
+
     private String description;
     private int index;
     private ResultStatus(String description,int index){
@@ -24,16 +24,5 @@ public enum ResultStatus {
 
     public int getValue(){
         return this.index;
-    }
-
-    public static ResultStatus valueOf(int value){
-        switch (value){
-            case 1:
-                return DELETED;
-            case 2:
-                return SOLD;
-            default:
-                return UNKNOWN;
-        }
     }
 }
