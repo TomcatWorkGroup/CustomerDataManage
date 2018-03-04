@@ -6,7 +6,7 @@
 	<groupId>com.itdreamworks</groupId>
 	<artifactId>customerdatamanage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>customerdatamanage</name>
 	<description>锅炉厂专用数据管理</description>
@@ -45,6 +45,18 @@
 			<artifactId>HikariCP</artifactId>
 			<version>2.7.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -53,6 +65,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>customerdatamanage</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
