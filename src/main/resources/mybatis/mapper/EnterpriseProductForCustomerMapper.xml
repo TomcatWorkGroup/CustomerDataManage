@@ -23,7 +23,7 @@
         EnterpriseProductForCustomerView
     </sql>
     <sql id="View_Column_List">
-      EnterpriseName,  CustomerId, CategoryName,ProductCode,SaleDatetime
+      EnterpriseName, CategoryName,ProductCode,SaleDatetime
     </sql>
     <sql id="Table_Column_List">
       EnterpriseId,  ProductCode, Id,DeviceId,CategoryId,Status
