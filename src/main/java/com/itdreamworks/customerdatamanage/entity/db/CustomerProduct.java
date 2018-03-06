@@ -2,11 +2,15 @@ package com.itdreamworks.customerdatamanage.entity.db;
 
 import java.io.Serializable;
 
+/**
+ * 产品entity
+ */
 public class CustomerProduct implements Serializable {
     /**
      * Status 已销售
      */
     public static final int  STATUS_SOLD = 0;
+
     private  int id,customerId,deviceId,status;
 
     public int getEnterpriseId() {
@@ -21,18 +25,34 @@ public class CustomerProduct implements Serializable {
     private String enterpriseProductCode;
     private String productCode,localId,categoryLocalId;
 
+    /**
+     * 获取产品本地唯一标识
+     * @return 产品本地唯一标识
+     */
     public String getLocalId() {
         return localId;
     }
 
+    /**
+     * 设置产品本地唯一标识
+     * @param localId 产品本地唯一标识
+     */
     public void setLocalId(String localId) {
         this.localId = localId;
     }
 
+    /**
+     * 获取产品类别本地唯一标识
+     * @return 品类别本地唯一标识
+     */
     public String getCategoryLocalId() {
         return categoryLocalId;
     }
 
+    /**
+     * 设置品类别本地唯一标识
+     * @param categoryLocalId 品类别本地唯一标识
+     */
     public void setCategoryLocalId(String categoryLocalId) {
         this.categoryLocalId = categoryLocalId;
     }
@@ -53,10 +73,18 @@ public class CustomerProduct implements Serializable {
         this.customerId = customerId;
     }
 
+    /**
+     * 获取产品销售状态
+     * @return 产品销售状态 0已售 1待售
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * 设置产品销售状态
+     * @param status 产品销售状态 0已售 1待售
+     */
     public void setStatus(int status) {
         this.status = status;
     }
@@ -77,10 +105,18 @@ public class CustomerProduct implements Serializable {
         this.enterpriseProductCode = enterpriseProductCode;
     }
 
+    /**
+     * 获取产品编码
+     * @return 产品编码
+     */
     public String getProductCode() {
         return productCode;
     }
 
+    /**
+     * 设置产品编码
+     * @param productCode 产品编码
+     */
     public void setProductCode(String productCode) {
         this.productCode = productCode;
     }

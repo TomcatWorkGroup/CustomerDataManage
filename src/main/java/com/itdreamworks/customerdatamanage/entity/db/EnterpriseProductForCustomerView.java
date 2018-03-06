@@ -11,11 +11,6 @@ public class EnterpriseProductForCustomerView implements Serializable {
 
     private String categoryName;
 
-    /**
-     * 企业将产品销售给客户时将客户ID填入此列
-     */
-    private Integer customerId;
-
     private String productCode;
 
     private Date SaleDatetime;
@@ -36,14 +31,6 @@ public class EnterpriseProductForCustomerView implements Serializable {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
     }
 
     public String getProductCode() {

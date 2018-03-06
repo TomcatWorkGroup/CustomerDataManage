@@ -55,10 +55,18 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
+    /**
+     * 获取员工状态
+     * @return 员工状态 0禁用 1正常
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * 设置员工状态 
+     * @param status 员工状态 0禁用 1正常
+     */
     public void setStatus(int status) {
         this.status = status;
     }
@@ -83,14 +91,22 @@ public class Employee implements Serializable {
         return password;
     }
 
+    /**
+     * 设置员工密码
+     * @param password 密码
+     */
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getMobile() {
         return mobile;
     }
 
+    /**
+     * 设置员工手机号码
+     * @param mobile 手机号码
+     */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
@@ -99,6 +115,10 @@ public class Employee implements Serializable {
         return email;
     }
 
+    /**
+     * 设置员工email
+     * @param email 员工email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -107,6 +127,10 @@ public class Employee implements Serializable {
         return weiXin;
     }
 
+    /**
+     * 设置员工微信号
+     * @param weiXin 员工微信号
+     */
     public void setWeiXin(String weiXin) {
         this.weiXin = weiXin;
     }
@@ -115,6 +139,10 @@ public class Employee implements Serializable {
         return realName;
     }
 
+    /**
+     * 设置员工真实姓名
+     * @param realName 员工真实姓名
+     */
     public void setRealName(String realName) {
         this.realName = realName;
     }
@@ -123,6 +151,10 @@ public class Employee implements Serializable {
         return qQ;
     }
 
+    /**
+     * 设置员工QQ号
+     * @param qQ 员工QQ号
+     */
     public void setqQ(String qQ) {
         this.qQ = qQ;
     }
@@ -139,6 +171,10 @@ public class Employee implements Serializable {
         return mark;
     }
 
+    /**
+     * 设置其他说明
+     * @param mark 其他说明
+     */
     public void setMark(String mark) {
         this.mark = mark;
     }

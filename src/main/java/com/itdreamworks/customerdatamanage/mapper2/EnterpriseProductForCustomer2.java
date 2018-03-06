@@ -10,6 +10,6 @@ import java.util.List;
 
 @Component
 public interface EnterpriseProductForCustomer2 {
-    List<EnterpriseProductForCustomerView> getTransactionRecords(@Param("startDatetime") Date startDatetime);
+    List<EnterpriseProductForCustomerView> getTransactionRecords(@Param("customerId") int customerId,@Param("startDatetime") Date startDatetime);
     EnterpriseProduct getProduct(@Param("productCode") String productCode);
 }

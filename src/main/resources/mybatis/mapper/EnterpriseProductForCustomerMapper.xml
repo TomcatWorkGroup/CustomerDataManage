@@ -35,6 +35,8 @@
         <include refid="View"/>
         WHERE
         SaleDatetime >=#{startDatetime}
+        AND
+        CustomerId = #{customerId}
     </select>
     <select id="getProduct" resultMap="BaseTableResultMap">
         SELECT
