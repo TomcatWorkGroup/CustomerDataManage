@@ -20,6 +20,8 @@ public class CustomerProductService {
     @Autowired
     private CustomerCategoryMapper2 categoryDao;
     @Autowired
+    private DeviceMapper2 deviceDao;
+    @Autowired
     private EnterpriseSaleRecordForCustomerMapper2 enterpriseSaleRecordForCustomerDao;
     @Autowired
     private EnterpriseProductForCustomer2 enterpriseProductForCustomerDao;
@@ -73,7 +75,7 @@ public class CustomerProductService {
     }
 
     @Transactional
-    public ResultStatus sell(int customerId, String productLocalId, String endUserLocalId,Date saleDatetime){
+    public ResultStatus sell(int customerId, String productLocalId, String endUserLocalId,Date saleDatetime,String boilerName){
         CustomerProduct product = productDao.find(customerId,productLocalId);
         if(null == product){
             return ResultStatus.UNKNOWN_PRODUCT;
@@ -94,6 +96,7 @@ public class CustomerProductService {
 
         productDao.changeStatus(CustomerProduct.STATUS_SOLD, customerId,productLocalId);
         enterpriseSaleRecordForCustomerDao.setEndUser(endUser.getId(),product.getEnterpriseProductCode(),customerId);
+        deviceDao.changeNickName(boilerName,product.getDeviceId());
         return ResultStatus.SUCCESS;
     }
 }

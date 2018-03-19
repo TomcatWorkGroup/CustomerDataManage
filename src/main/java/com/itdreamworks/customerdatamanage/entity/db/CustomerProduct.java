@@ -97,10 +97,18 @@ public class CustomerProduct implements Serializable {
         this.deviceId = deviceId;
     }
 
+    /**
+     * 获取产品关联的配件编号
+     * @return 配件编号
+     */
     public String getEnterpriseProductCode() {
         return enterpriseProductCode;
     }
 
+    /**
+     * 设置产品关联的配件编号
+     * @param enterpriseProductCode 配件编号
+     */
     public void setEnterpriseProductCode(String enterpriseProductCode) {
         this.enterpriseProductCode = enterpriseProductCode;
     }

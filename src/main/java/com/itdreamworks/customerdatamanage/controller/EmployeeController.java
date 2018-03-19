@@ -7,6 +7,7 @@ import com.itdreamworks.customerdatamanage.utils.ResultStatusJsonStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class EmployeeController {
      * @return 执行结果
      */
     @PostMapping(value = "/remove")
-    public String remove(int orgId, String loginId) {
+    public String remove(@RequestParam("customerId") int orgId, String loginId) {
         ResultStatus status = service.remove(orgId, loginId);
         return ResultStatusJsonStringUtil.getStatusString(status);
     }
@@ -66,7 +67,7 @@ public class EmployeeController {
      * @return 执行结果
      */
     @PostMapping(value = "/changeStatus")
-    public String changeStatus(int status, int orgId, String loginId) {
+    public String changeStatus(int status, @RequestParam("customerId") int orgId, String loginId) {
         ResultStatus s = service.changeStatus(status, orgId, loginId);
         return ResultStatusJsonStringUtil.getStatusString(s);
     }
@@ -78,7 +79,7 @@ public class EmployeeController {
      * @return 执行结果
      */
     @PostMapping(value = "/addDeviceMap")
-    public String addDeviceMap(int orgId, String loginId, String productLocalId) {
+    public String addDeviceMap(@RequestParam("customerId") int orgId, String loginId, String productLocalId) {
         ResultStatus s = service.addDeviceMap(orgId, loginId, productLocalId);
         return ResultStatusJsonStringUtil.getStatusString(s);
     }
@@ -90,7 +91,7 @@ public class EmployeeController {
      * @return 执行结果
      */
     @PostMapping(value = "/removeDeviceMap")
-    public String removeDeviceMap(int orgId, String loginId, String productLocalId) {
+    public String removeDeviceMap(@RequestParam("customerId") int orgId, String loginId, String productLocalId) {
         ResultStatus s = service.removeDeviceMap(orgId, loginId, productLocalId);
         return ResultStatusJsonStringUtil.getStatusString(s);
     }

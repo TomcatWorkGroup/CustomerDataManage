@@ -69,8 +69,8 @@ public class ProductController {
      * @throws Exception 销售时间格式为 yyyy-MM-dd HH:mm:ss，否则将出现转换异常
      */
     @PostMapping(value = "/sell")
-    public String sell(int customerId, String productLocalId, String endUserLocalId, String saleDatetime) throws Exception {
+    public String sell(int customerId, String productLocalId, String endUserLocalId, String saleDatetime,String boilerName) throws Exception {
         Date date = format.parse(saleDatetime);
-        return ResultStatusJsonStringUtil.getStatusString(service.sell(customerId, productLocalId, endUserLocalId, date));
+        return ResultStatusJsonStringUtil.getStatusString(service.sell(customerId, productLocalId, endUserLocalId, date,boilerName));
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdreamworks.customerdatamanage.mapper2.DeviceMapper2">
+    <resultMap id="BaseResultMap" type="com.itdreamworks.customerdatamanage.entity.db.Device">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="NickName" jdbcType="VARCHAR" property="nickName"/>
+    </resultMap>
+    <sql id="Table">
+    Device
+    </sql>
+    <sql id="Base_Column_List">
+    Id, NickName
+    </sql>
+    <sql id="Fix_Option">
+        Id=#{id}
+    </sql>
+    <select id="find" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table"/>
+        where
+        <include refid="Fix_Option"/>
+    </select>
+    <update id="changeNickName">
+        UPDATE
+        <include refid="Table"/>
+        SET
+        NickName = #{nickName}
+        WHERE
+        <include refid="Fix_Option"/>
+    </update>
+</mapper>
