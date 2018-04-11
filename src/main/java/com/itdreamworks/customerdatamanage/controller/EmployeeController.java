@@ -33,8 +33,8 @@ public class EmployeeController {
      * @return 执行结果
      */
     @PostMapping(value = "/add")
-    public String add(Employee employee) {
-        ResultStatus status = service.add(employee);
+    public String add(@RequestParam("customerId") int orgId,Employee employee) {
+        ResultStatus status = service.add(orgId, employee);
         return ResultStatusJsonStringUtil.getStatusString(status);
     }
 

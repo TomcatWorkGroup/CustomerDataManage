@@ -50,8 +50,9 @@ public class CustomerEmployeeService {
             return ResultStatus.UNKNOWN_EMPLOYEE;
     }
 
-    public ResultStatus add(Employee employee){
+    public ResultStatus add(int orgId,Employee employee){
         employee.setOrgType(Employee.ORG_CUSTOMER);
+        employee.setOrgId(orgId);
         employeeDao.add(employee);
         return ResultStatus.SUCCESS;
     }
